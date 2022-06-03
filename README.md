@@ -1,2 +1,2 @@
-# Movies-JV
+# Movies-API
 Consumo de API rest con javaScript
