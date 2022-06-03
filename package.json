@@ -1,0 +1,19 @@
+{
+  "name": "movies-api",
+  "version": "1.0.0",
+  "description": "Consumo de API rest con javaScript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Veron-Juan/Movies-API.git"
+  },
+  "author": "Juan Veron",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Veron-Juan/Movies-API/issues"
+  },
+  "homepage": "https://github.com/Veron-Juan/Movies-API#readme"
+}
