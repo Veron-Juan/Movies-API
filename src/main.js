@@ -30,16 +30,41 @@ function createMovies(movies, container){
                 'https://image.tmdb.org/t/p/w300' + movie.poster_path);
     
             movieContainer.appendChild(movieImg);
-            trendingMoviesPreviewList.appendChild(movieContainer);
+            container.appendChild(movieContainer);
     
         })
 }
 
 
+function createCategories(categories, container){
+    container.innerHTML = "";
 
+    categories.forEach(category => {
+        // const categories = data.genres;
+        // categories.forEach(category => {
+        //     const previewCategoriesContainer = document.querySelector('#categoriesPreview .categoriesPreview-list');
+            const categoryContainer = document.createElement('div')
+            categoryContainer.classList.add('category-container')
+    
+            const categoryTitle = document.createElement('h3');
+            categoryTitle.classList.add('category-title');
+            categoryTitle.setAttribute('id', 'id' + category.id);
+            
+            categoryTitle.addEventListener('click', ()=>{
+                location.hash = `#category=${category.id}-${category.name}`;
+            })
+    
+            const categoryTitleText = document.createTextNode(category.name)
+            categoryTitle.appendChild(categoryTitleText)
+            categoryContainer.appendChild(categoryTitle);
+            container.appendChild(categoryContainer);
+    
+           
+    
+        })
+}
 
 //llamados api
-
 
 async function getTrendingMoviesPreview(){
 
@@ -48,27 +73,9 @@ async function getTrendingMoviesPreview(){
     // const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
     // const data = await res.json();
 
-    trendingMoviesPreviewList.innerHTML = "";
-    movies.forEach(movie => {
-    // const movies = data.results;
-    // movies.forEach(movie => {
-    //     const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
-        const movieContainer = document.createElement('div');
-        //lo q se hace aca es que al movieContainer se le agrega una clase ya existente
-        movieContainer.classList.add('movie-container')
 
-        const movieImg = document.createElement('img');
-        movieImg.classList.add('movie-img');
-        // acá con setAtributte agregamos la etiqueta alt, y como segundo parametro lo que va adentro, en el objeto data aparece como movie.title cada titulo de la pelicula
-        movieImg.setAttribute('alt', movie.title)
-        movieImg.setAttribute(
-            'src', 
-            'https://image.tmdb.org/t/p/w300' + movie.poster_path);
-
-        movieContainer.appendChild(movieImg);
-        trendingMoviesPreviewList.appendChild(movieContainer);
-
-    })
+    createMovies(movies, trendingMoviesPreviewList);
+    
 }
 
 async function getCategoriesPreview(){
@@ -77,31 +84,10 @@ async function getCategoriesPreview(){
     // const res = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=' + API_KEY);
     // const data = await res.json();
 
-    categoriesPreviewList.innerHTML = "";
+    // categoriesPreviewList.innerHTML = "";
 
-    categories.forEach(category => {
-    // const categories = data.genres;
-    // categories.forEach(category => {
-    //     const previewCategoriesContainer = document.querySelector('#categoriesPreview .categoriesPreview-list');
-        const categoryContainer = document.createElement('div')
-        categoryContainer.classList.add('category-container')
+    createCategories(categories, categoriesPreviewList);
 
-        const categoryTitle = document.createElement('h3');
-        categoryTitle.classList.add('category-title');
-        categoryTitle.setAttribute('id', 'id' + category.id);
-        
-        categoryTitle.addEventListener('click', ()=>{
-            location.hash = `#category=${category.id}-${category.name}`;
-        })
-
-        const categoryTitleText = document.createTextNode(category.name)
-        categoryTitle.appendChild(categoryTitleText)
-        categoryContainer.appendChild(categoryTitle);
-        categoriesPreviewList.appendChild(categoryContainer);
-
-       
-
-    })
 }
 
 
@@ -114,26 +100,7 @@ async function getMoviesByCategory(id){
     }); //como estoy trabando con axios podemos poner directamente los parametros que necesito, sino tendria que poner en la url : ?with_genres='
     const movies = data.results;
     
+    createMovies(movies, genericSection);
 
-    genericSection.innerHTML = "";
-    movies.forEach(movie => {
-    // const movies = data.results;
-    // movies.forEach(movie => {
-    //     const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
-        const movieContainer = document.createElement('div');
-        //lo q se hace aca es que al movieContainer se le agrega una clase ya existente
-        movieContainer.classList.add('movie-container')
-
-        const movieImg = document.createElement('img');
-        movieImg.classList.add('movie-img');
-        // acá con setAtributte agregamos la etiqueta alt, y como segundo parametro lo que va adentro, en el objeto data aparece como movie.title cada titulo de la pelicula
-        movieImg.setAttribute('alt', movie.title)
-        movieImg.setAttribute(
-            'src', 
-            'https://image.tmdb.org/t/p/w300' + movie.poster_path);
-
-        movieContainer.appendChild(movieImg);
-        genericSection.appendChild(movieContainer);
-
-    })
+    
 }
