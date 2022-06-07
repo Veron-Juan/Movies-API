@@ -20,6 +20,9 @@ function createMovies(movies, container){
             const movieContainer = document.createElement('div');
             //lo q se hace aca es que al movieContainer se le agrega una clase ya existente
             movieContainer.classList.add('movie-container')
+            movieContainer.addEventListener('click', ()=>{
+                location.hash = '#movie=' + movie.id  ;
+            })
     
             const movieImg = document.createElement('img');
             movieImg.classList.add('movie-img');
@@ -72,6 +75,7 @@ async function getTrendingMoviesPreview(){
     const movies = data.results;
     // const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
     // const data = await res.json();
+    console.log(movies)
 
 
     createMovies(movies, trendingMoviesPreviewList);
@@ -102,5 +106,50 @@ async function getMoviesByCategory(id){
     
     createMovies(movies, genericSection);
 
+    
+}
+
+async function getMoviesBySearch(query){
+
+    const { data } = await api('search/movie', {
+        params:{
+            query,
+        }
+    }); //como estoy trabando con axios podemos poner directamente los parametros que necesito, sino tendria que poner en la url : ?with_genres='
+    const movies = data.results;
+    
+    createMovies(movies, genericSection);
+
+    
+}
+
+async function getTrendingMovies(){
+
+    const { data } = await api('trending/movie/day');
+    const movies = data.results;
+    // const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
+    // const data = await res.json();
+
+
+    createMovies(movies, trendingMoviesPreviewList);
+    
+}
+
+async function getMovieById(id){
+
+    const { data: movie } = await api('movie/' + id);
+    
+    // const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
+    // const data = await res.json();
+
+
+    const movieImgUrl = 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
+    headerSection.style.background = `url(${movieImgUrl})`;
+
+    movieDetailTitle.textContent = movie.title; 
+    movieDetailDescription.textContent = movie.overview;
+    movieDetailScore.textContent = movie.vote_average;
+
+    createCategories(movie.genres, movieDetailCategoriesList)
     
 }
