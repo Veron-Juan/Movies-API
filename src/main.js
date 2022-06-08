@@ -11,7 +11,7 @@ const api = axios.create({
 
 //utils
 function createMovies(movies, container){
-    container.innerHTML = '';
+    container.innerHTML = '';  //con esto limpio la pagina y no se sobreagregan elementos
 
     movies.forEach(movie => {
         // const movies = data.results;
