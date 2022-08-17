@@ -104,12 +104,6 @@ function movieDetailsPage() {
   getMovieById(movieId);
 }
 
-
-
-
-
-
-
 function searchPage() {
   console.log("Search!!")
 
