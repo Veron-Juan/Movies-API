@@ -1,16 +1,22 @@
 // Sections
 const headerSection = document.querySelector('#header');
 const trendingPreviewSection = document.querySelector('#trendingPreview');
+const rankedPreviewSection = document.querySelector('#rankedPreview');
+
 const categoriesPreviewSection = document.querySelector('#categoriesPreview');
 const genericSection = document.querySelector('#genericList');
 const movieDetailSection = document.querySelector('#movieDetail');
+const likedMoviesSection = document.querySelector('#liked');
 
 // Lists & Containers
 const searchForm = document.querySelector('#searchForm');
 const trendingMoviesPreviewList = document.querySelector('.trendingPreview-movieList');
+const rankedMoviesPreviewList = document.querySelector('.rankedPreview-movieList');
 const categoriesPreviewList = document.querySelector('.categoriesPreview-list');
 const movieDetailCategoriesList = document.querySelector('#movieDetail .categories-list');
 const relatedMoviesContainer = document.querySelector('.relatedMovies-scrollContainer');
+const likedMoviesListArticle = document.querySelector('.liked-movieList');
+const punteadas = document.querySelector('.PunteadasPreview-movieList');
 
 // Elements
 const headerTitle = document.querySelector('.header-title');
@@ -21,7 +27,10 @@ const searchFormInput = document.querySelector('#searchForm input');
 const searchFormBtn = document.querySelector('#searchBtn');
 
 const trendingBtn = document.querySelector('.trendingPreview-btn');
+const rankedBtn = document.querySelector('.ranked-btn');
 
 const movieDetailTitle = document.querySelector('.movieDetail-title');
 const movieDetailDescription = document.querySelector('.movieDetail-description');
 const movieDetailScore = document.querySelector('.movieDetail-score');
+
+

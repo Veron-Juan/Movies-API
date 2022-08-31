@@ -1,5 +1,5 @@
 SearchBtn.addEventListener('click', ()=> {
-    location.hash = '#search='+ searchFormInput.value;;
+    location.hash = '#search='+ searchFormInput.value;
 })
 
 trendingBtn.addEventListener('click', ()=> {
@@ -11,7 +11,6 @@ arrowBtn.addEventListener('click', ()=> {
     location.hash = window.history.back();
     
 })
-
 
 
 
@@ -38,7 +37,7 @@ function navigator() {
 function homePage() {
   console.log("Home!!")
 
-
+  
   headerSection.style.background = ''; //con esto solucioné el problema q al volver al home, se veia la imagen de la pelicula en el header
   headerSection.classList.remove('header-container--long');
   headerSection.getElementsByClassName.background = '',
@@ -50,13 +49,18 @@ function homePage() {
 
   trendingPreviewSection.classList.remove('inactive');
   categoriesPreviewSection.classList.remove('inactive');
+  likedMoviesSection.classList.remove('inactive');
   genericSection.classList.add('inactive');
   movieDetailSection.classList.add('inactive');
+  
 
 
 
-  getTrendingMoviesPreview()
-  getCategoriesPreview()
+  getTrendingMoviesPreview();
+  getCategoriesPreview();
+  getLikedMovies();
+  rankedMovie()
+  
 }
 function categoriesPage() {
   console.log("Categories!!");
@@ -70,9 +74,13 @@ function categoriesPage() {
   searchForm.classList.add('inactive');
 
   trendingPreviewSection.classList.add('inactive');
+  rankedPreviewSection.classList.add('inactive');
   categoriesPreviewSection.classList.add('inactive');
+  likedMoviesSection.classList.add('inactive');
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
+  
+  
 
   const [_, categoryData] = location.hash.split('=')        // ['#category', 'id-name']
   const [categoryId, categoryName] = categoryData.split('-')
@@ -94,9 +102,13 @@ function movieDetailsPage() {
   searchForm.classList.add('inactive');
 
   trendingPreviewSection.classList.add('inactive');
+  rankedPreviewSection.classList.add('inactive');
   categoriesPreviewSection.classList.add('inactive');
+  likedMoviesSection.classList.add('inactive');
   genericSection.classList.add('inactive');
   movieDetailSection.classList.remove('inactive');
+  
+  
 
   // ['movie', '4646']
   const [_, movieId] = location.hash.split('=');
@@ -116,9 +128,12 @@ function searchPage() {
   searchForm.classList.remove('inactive');
 
   trendingPreviewSection.classList.add('inactive');
+  rankedPreviewSection.classList.add('inactive');
   categoriesPreviewSection.classList.add('inactive');
+  likedMoviesSection.classList.add('inactive');
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
+  
 
   //['#search, 'buscador']
   const [_, query] = location.hash.split('=');
@@ -136,9 +151,15 @@ function trendsPage() {
   searchForm.classList.add('inactive');
 
   trendingPreviewSection.classList.add('inactive');
+  rankedPreviewSection.classList.add('inactive');
   categoriesPreviewSection.classList.add('inactive');
+  likedMoviesSection.classList.add('inactive');
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
+  
+  
+  
+  
 
   headerCategoryTitle.innerHTML = 'Tendencias';
 

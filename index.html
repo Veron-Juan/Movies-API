@@ -19,66 +19,92 @@
     <h1 class="header-title header-title--categoryView inactive">Acción</h1>
 
     <form id="searchForm" class="header-searchForm">
-      <input type="text" placeholder="Vengadores" />
+      <input type="text" placeholder="¿Qué película buscas?" />
       <button id="SearchBtn">🔍</button>
     </form>
   </header>
 
-  <section id="trendingPreview" class="trendingPreview-container">
-    <div class="trendingPreview-header">
+  <section id="trendingPreview" class="trendingPreview-container ">
+    <div class="trendingPreview-header ">
       <h2 class="trendingPreview-title">Tendencias</h2>
       <button class="trendingPreview-btn">Ver más</button>
     </div>
 
     <article class="trendingPreview-movieList">
-      <!-- <div class="movie-container">
-        <img
-          src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-          class="movie-img"
-          alt="Nombre de la película"
-        />
-      </div> -->
-
-      
+      <!-- <div class="movie-container movie-container--loading"></div>
+      <div class="movie-container movie-container--loading"></div>
+      <div class="movie-container movie-container--loading"></div> -->
     </article>
   </section>
+
+
+  <section id="rankedPreview" class="ranked-container">
+    <div class="ranked-header">
+      <h2 class="ranked-title"></h2>
+      <button class="ranked-btn">Ver más</button>
+    </div>
+
+    <article class="rankedPreview-movieList"></article>
+  </section>
+  <!-- <section id="trendingPreview" class="trendingPreview-container">
+    <div class="trendingPreview-header">
+      <h2 class="trendingPreview-title">Mejores punteadas</h2>
+      <button class="trendingPreview-btn">Ver más</button>
+      
+    </div>
+    <article class="PunteadasPreview-movieList"></article>
+  </section> -->
+    
+
+  <!-- <div class="prueba"></div> -->
 
   <section id="categoriesPreview" class="categoriesPreview-container">
     <h2 class="categoriesPreview-title">Categorías</h2>
 
     <article class="categoriesPreview-list">
-      <!-- <div class="category-container">
-        <h3 id="id28" class="category-title">Romance</h3>
-      </div> -->
+      <div class="category-container category-container--loading"></div>
+      <div class="category-container category-container--loading"></div>
+      <div class="category-container category-container--loading"></div>
+      
 
       
     </article>
   </section>
 
+  
+
+  <section id="liked" class="liked-container">
+    <div class="liked-header">
+      <h2 class="liked-title">Peliculas Favoritas</h2>
+    </div>
+
+    <article class="liked-movieList">
+      <!-- <div class="movie-container">
+      <img
+        src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+        class="movie-img"
+        alt="Nombre de la película"
+      /> -->
+    
+    </article>
+  </section>
+
+
   <section id="genericList" class="genericList-container inactive">
-    <div class="movie-container">
-      <img
-        src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-        class="movie-img"
-        alt="Nombre de la película"
-      />
-    </div>
+    <!-- <div class="movie-container movie-container--loading"></div>
+<div class="movie-container movie-container--loading"></div>
+<div class="movie-container movie-container--loading"> -->
 
-    <div class="movie-container">
-      <img
-        src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-        class="movie-img"
-        alt="Nombre de la película"
-      />
-    </div>
+</div>
+      
 
-    <div class="movie-container">
+    <!-- <div class="movie-container">
       <img
         src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
         class="movie-img"
         alt="Nombre de la película"
       />
-    </div>
+    </div> -->
   </section>
 
   <section id="movieDetail" class="movieDetail-container inactive">
@@ -88,8 +114,19 @@
       Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy's life.
     </p>
 
+
+
+    
+
     <article class="categories-list">
-      <div class="category-container">
+
+      <div class="category-container category-container--loading"></div>
+      <div class="category-container category-container--loading"></div>
+      <div class="category-container category-container--loading">
+      
+      </div>
+    </article>
+      <!-- <div class="category-container">
         <h3 id="id28" class="category-title">Romance</h3>
       </div>
 
@@ -100,38 +137,20 @@
       <div class="category-container">
         <h3 id="id14" class="category-title">Acción</h3>
       </div>
-    </article>
+    </article> -->
 
     <article class="relatedMovies-container">
       <h2 class="relatedMovies-title">Películas similares</h2>
-
       <div class="relatedMovies-scrollContainer">
-        <div class="movie-container">
-          <img
-            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-            class="movie-img"
-            alt="Nombre de la película"
-          />
-        </div>
-        
-        <div class="movie-container">
-          <img
-            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-            class="movie-img"
-            alt="Nombre de la película"
-          />
-        </div>
-        
-        <div class="movie-container">
-          <img
-            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-            class="movie-img"
-            alt="Nombre de la película"
-          />
-        </div>
+      <!-- <div class="movie-container movie-container--loading"></div>
+      <div class="movie-container movie-container--loading"></div>
+      <div class="movie-container movie-container--loading"></div> -->
+
       </div>
     </article>
-  </section>
+      
+
+     
 
   <footer>footer</footer>
   

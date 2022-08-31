@@ -9,30 +9,113 @@ const api = axios.create({
 });
 
 
+function likedMoviesList(){
+    const item = JSON.parse(localStorage.getItem('liked_movies'));
+    let movies;
+
+    if (item){
+        movies = item;
+    } else {
+        movies = {};
+    }
+    return movies;
+}
+
+function likeMovie(movie){
+    
+    const likedMovies = likedMoviesList();
+
+    if (likedMovies[movie.id]){
+        likedMovies[movie.id] = undefined;
+        //removerla de localstorage
+    } else {
+        likedMovies[movie.id] = movie;
+    }
+
+
+    localStorage.setItem('liked_movies',JSON.stringify(likedMovies));
+
+    getTrendingMoviesPreview()
+    getLikedMovies()
+    
+    
+    
+    
+}
+
+
 //utils
-function createMovies(movies, container){
-    container.innerHTML = '';  //con esto limpio la pagina y no se sobreagregan elementos
+
+
+const lazyLoader = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+        if (entry.isIntersecting){
+            // console.log(entry.target)
+            const url = entry.target.getAttribute('data-img')
+            entry.target.setAttribute('src', url);
+        }
+        // console.log(entry.target.setAttribute)
+        
+    } )
+});
+
+
+
+
+
+// lazyLoad = false
+
+function createMovies(movies, container,{
+    lazyLoad = false,
+    clean = true,
+  } = {}, ){
+    if (clean) {
+        container.innerHTML = '';
+    }
+    
 
     movies.forEach(movie => {
+        
         // const movies = data.results;
         // movies.forEach(movie => {
         //     const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
             const movieContainer = document.createElement('div');
             //lo q se hace aca es que al movieContainer se le agrega una clase ya existente
             movieContainer.classList.add('movie-container')
-            movieContainer.addEventListener('click', ()=>{
-                location.hash = '#movie=' + movie.id  ;
-            })
+            
     
             const movieImg = document.createElement('img');
             movieImg.classList.add('movie-img');
             // acá con setAtributte agregamos la etiqueta alt, y como segundo parametro lo que va adentro, en el objeto data aparece como movie.title cada titulo de la pelicula
             movieImg.setAttribute('alt', movie.title)
             movieImg.setAttribute(
-                'src', 
+                lazyLoad ? 'data-img' : 'src', 
                 'https://image.tmdb.org/t/p/w300' + movie.poster_path);
+            movieImg.addEventListener('click', ()=>{
+                    location.hash = '#movie=' + movie.id  ;
+                })
+            movieImg.addEventListener('error', ()=> {
+                movieImg.setAttribute('src', 'https://i.pinimg.com/originals/a5/4b/f8/a54bf8e8bd76d92be03bbecae09c1b69.png')
+            });
+
+            const movieBtn = document.createElement('button');
+            movieBtn.classList.add('movie-btn');
+            movieBtn.addEventListener('click', ()=> {
+                movieBtn.classList.toggle('movie-btn--liked');
+                likeMovie(movie);
+                
+                
+                
+                
+            })
+            
+            
+            if (lazyLoad) {
+                lazyLoader.observe(movieImg);
+                }
     
             movieContainer.appendChild(movieImg);
+            movieContainer.appendChild(movieBtn);
             container.appendChild(movieContainer);
     
         })
@@ -70,17 +153,27 @@ function createCategories(categories, container){
 //llamados api
 
 async function getTrendingMoviesPreview(){
-
+    
     const { data } = await api('trending/movie/day');
     const movies = data.results;
     // const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
     // const data = await res.json();
     console.log(movies)
-
-
-    createMovies(movies, trendingMoviesPreviewList);
+    createMovies(movies, trendingMoviesPreviewList, true);
     
 }
+
+
+async function rankedMovie(){
+    
+    const { data } = await api('movie/top_rated');
+    const movies = data.results;
+
+    console.log(movies)
+    createMovies(movies, rankedMoviesPreviewList, true);
+    
+}
+
 
 async function getCategoriesPreview(){
     const { data } = await api('genre/movie/list');
@@ -104,7 +197,7 @@ async function getMoviesByCategory(id){
     }); //como estoy trabando con axios podemos poner directamente los parametros que necesito, sino tendria que poner en la url : ?with_genres='
     const movies = data.results;
     
-    createMovies(movies, genericSection);
+    createMovies(movies, genericSection, { lazyLoad: true });
 
     
 }
@@ -118,8 +211,9 @@ async function getMoviesBySearch(query){
     }); //como estoy trabando con axios podemos poner directamente los parametros que necesito, sino tendria que poner en la url : ?with_genres='
     const movies = data.results;
     
-    createMovies(movies, genericSection);
+    createMovies(movies, genericSection, { lazyLoad: true, clean: false },);
 
+   
     
 }
 
@@ -127,11 +221,53 @@ async function getTrendingMovies(){
 
     const { data } = await api('trending/movie/day');
     const movies = data.results;
-    // const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
-    // const data = await res.json();
+    console.log(data.results)
+    
+
+    createMovies(movies, genericSection, { lazyLoad: true, clean: true });
+
+    
+
+    const peliculasEnPantalla = document.querySelectorAll('.movie-container');
+    const peliculasEnPantallaArr = Array.prototype.slice.call(peliculasEnPantalla);
+    const ultimaPelicula = peliculasEnPantallaArr[peliculasEnPantallaArr.length -1]
+    observador.observe(ultimaPelicula)
+    
+   
+}
+
+page = 2
+let observador = new IntersectionObserver((entradas, observador) => {
+	entradas.forEach(entrada => {
+		if(entrada.isIntersecting){
+            page++;
+			getPaginatedTrendingMovies();
+		}
+	})
+}, {
+	rootMargin: '0px 0px 200px 0px',
+	threshold: 1.0
+})
 
 
-    createMovies(movies, trendingMoviesPreviewList);
+
+
+async function getPaginatedTrendingMovies(){
+    
+    const { data } = await api('trending/movie/day', {
+        params: {
+            page,
+        },
+    });
+    
+    const movies = data.results;
+    createMovies(movies, genericSection, { lazyLoad: true, clean: false },);
+
+
+    const peliculasEnPantalla = document.querySelectorAll('.movie-container');
+    const peliculasEnPantallaArr = Array.prototype.slice.call(peliculasEnPantalla);
+    const ultimaPelicula = peliculasEnPantallaArr[peliculasEnPantallaArr.length -1]
+    observador.observe(ultimaPelicula)
     
 }
 
@@ -163,4 +299,18 @@ async function getRelatedMoviesId(id){
     const relatedMovies = data.results;
 
     createMovies(relatedMovies, relatedMoviesContainer);
+}
+
+
+function getLikedMovies(){
+    
+    const likedMovies = likedMoviesList();
+    const moviesArray = Object.values(likedMovies);
+
+    
+    createMovies(moviesArray, likedMoviesListArticle, true );
+    console.log(likedMovies)
+    
+
+
 }
