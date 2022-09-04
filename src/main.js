@@ -39,9 +39,31 @@ function likeMovie(movie){
     getLikedMovies()
     
     
-    
-    
 }
+
+window.addEventListener('load', function(){
+    new Glider(this.document.querySelector('.rankedPreview-movieList'), {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        draggable: true,
+        dots: '.carousel__indicadores',
+        arrows: {
+        prev: '.btn-anterior',
+        next: '.btn-siguiente',
+    }});
+})
+
+window.addEventListener('load', function(){
+    new Glider(this.document.querySelector('.trendingPreview-movieList'), {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        draggable: true,
+        dots: '.carousel__indicadores1',
+        arrows: {
+        prev: '.btn1-anterior',
+        next: '.btn1-siguiente',
+    }});
+})
 
 
 //utils
@@ -70,7 +92,7 @@ function createMovies(movies, container,{
     clean = true,
   } = {}, ){
     if (clean) {
-        container.innerHTML = '';
+        container.innerHTML='';
     }
     
 
@@ -95,7 +117,8 @@ function createMovies(movies, container,{
                     location.hash = '#movie=' + movie.id  ;
                 })
             movieImg.addEventListener('error', ()=> {
-                movieImg.setAttribute('src', 'https://i.pinimg.com/originals/a5/4b/f8/a54bf8e8bd76d92be03bbecae09c1b69.png')
+                movieImg.style.display= "none";
+                // movieImg.setAttribute('src', 'https://i.pinimg.com/originals/a5/4b/f8/a54bf8e8bd76d92be03bbecae09c1b69.png')
             });
 
             const movieBtn = document.createElement('button');
@@ -152,6 +175,7 @@ function createCategories(categories, container){
 
 //llamados api
 
+//obtengo trending movies version chica
 async function getTrendingMoviesPreview(){
     
     const { data } = await api('trending/movie/day');
@@ -163,7 +187,7 @@ async function getTrendingMoviesPreview(){
     
 }
 
-
+//obtengo pupular movies version chica
 async function rankedMovie(){
     
     const { data } = await api('movie/top_rated');
@@ -217,6 +241,7 @@ async function getMoviesBySearch(query){
     
 }
 
+//obtengo trending movies version grande
 async function getTrendingMovies(){
 
     const { data } = await api('trending/movie/day');
@@ -236,7 +261,27 @@ async function getTrendingMovies(){
    
 }
 
+//obtengo popular movies version grande
+async function getPupularMovies(){
+
+    const { data } = await api('movie/top_rated');
+    const movies = data.results;
+
+    console.log(movies)
+    createMovies(movies, containerPopulares, true);
+
+    
+
+    // const peliculasEnPantalla = document.querySelectorAll('.movie-container');
+    // const peliculasEnPantallaArr = Array.prototype.slice.call(peliculasEnPantalla);
+    // const ultimaPelicula = peliculasEnPantallaArr[peliculasEnPantallaArr.length -1]
+    // observador.observe(ultimaPelicula)
+    
+   
+}
+
 page = 2
+//observo la ultima pelicula de trending y ejecuto getpaginated
 let observador = new IntersectionObserver((entradas, observador) => {
 	entradas.forEach(entrada => {
 		if(entrada.isIntersecting){
@@ -248,9 +293,6 @@ let observador = new IntersectionObserver((entradas, observador) => {
 	rootMargin: '0px 0px 200px 0px',
 	threshold: 1.0
 })
-
-
-
 
 async function getPaginatedTrendingMovies(){
     
@@ -264,10 +306,41 @@ async function getPaginatedTrendingMovies(){
     createMovies(movies, genericSection, { lazyLoad: true, clean: false },);
 
 
+    // const peliculasEnPantalla = document.querySelectorAll('.movie-container');
+    // const peliculasEnPantallaArr = Array.prototype.slice.call(peliculasEnPantalla);
+    // const ultimaPelicula = peliculasEnPantallaArr[peliculasEnPantallaArr.length -1]
+    // observador.observe(ultimaPelicula)
+    
+}
+
+//observo la ultiama pelucila popular y ejecuto getpaginatedpopular
+let observador2 = new IntersectionObserver((entradas, observador) => {
+	entradas.forEach(entrada => {
+		if(entrada.isIntersecting){
+            page++;
+			getPaginatedPopularMovies();
+		}
+	})
+}, {
+	rootMargin: '0px 0px 200px 0px',
+	threshold: 1.0
+})
+async function getPaginatedPupularMovies(){
+    
+    const { data } = await api('movie/top_rated', {
+        params: {
+            page,
+        },
+    });
+    
+    const movies = data.results;
+    createMovies(movies, genericSection, { lazyLoad: true, clean: false },);
+
+
     const peliculasEnPantalla = document.querySelectorAll('.movie-container');
     const peliculasEnPantallaArr = Array.prototype.slice.call(peliculasEnPantalla);
     const ultimaPelicula = peliculasEnPantallaArr[peliculasEnPantallaArr.length -1]
-    observador.observe(ultimaPelicula)
+    observador2.observe(ultimaPelicula)
     
 }
 
@@ -313,4 +386,11 @@ function getLikedMovies(){
     
 
 
+}
+
+const menu = document.querySelector('.menu-toggle');
+
+const handle = ()=>{
+  menu.classList.toggle('active')
+  
 }

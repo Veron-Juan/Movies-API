@@ -5,22 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@700;800&family=Red+Hat+Display:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles/app.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1.7.7/glider.min.css">
+  <script src="https://kit.fontawesome.com/73128adacf.js" crossorigin="anonymous"></script>
+  
+  
 
   <title>Movies API</title>
 </head>
 <body>
   <header id="header" class="header-container">
     <span class="header-arrow inactive">&lt;</span>
-    <h1 class="header-title">Movies API</h1>
+    <div class="header-first">
+      <i  onclick=(handle()) class="bars fa-solid fa-bars-staggered"></i>
+      <h1 class="header-title">Movies API</h1>
+    </div>
+    
     <h1 class="header-title header-title--categoryView inactive">Acción</h1>
+    <nav class="menu-toggle">
+      <ul class="menu-toggle-ul">
+        <li class="menu-toggle-ul_li">Categories</li>
+        <li class="menu-toggle-ul_li">Trends</li>
+        <li class="menu-toggle-ul_li">Popular</li>
+        <li class="menu-toggle-ul_li">Favorites</li>
+        <li class="menu-toggle-ul_li">API Movie DB</li>
+        <li class="menu-toggle-ul_li">About me</li>
+      </ul>
+    </nav>
 
     <form id="searchForm" class="header-searchForm">
       <input type="text" placeholder="¿Qué película buscas?" />
-      <button id="SearchBtn">🔍</button>
+      <button id="SearchBtn"><i class="fas fa-search"></i></button>
     </form>
   </header>
 
@@ -30,11 +49,18 @@
       <button class="trendingPreview-btn">Ver más</button>
     </div>
 
+    <button aria-label="Anterior" class="btn1-anterior">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
     <article class="trendingPreview-movieList">
       <!-- <div class="movie-container movie-container--loading"></div>
       <div class="movie-container movie-container--loading"></div>
       <div class="movie-container movie-container--loading"></div> -->
     </article>
+    <button aria-label="Siguiente" class="btn1-siguiente">
+      <i class="fa-solid fas fa-chevron-right"></i>
+    </button>
+    <div role="tablist" class="carousel__indicadores1"></div>
   </section>
 
 
@@ -44,7 +70,81 @@
       <button class="ranked-btn">Ver más</button>
     </div>
 
-    <article class="rankedPreview-movieList"></article>
+    <button aria-label="Anterior" class="btn-anterior">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <article class="rankedPreview-movieList">
+
+      
+
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+      <div class="movie-container">
+        <img class="movie-img">
+      </div>
+
+      
+    </article>
+    <button aria-label="Siguiente" class="btn-siguiente">
+      <i class="fa-solid fas fa-chevron-right"></i>
+    </button>
+
+    <div role="tablist" class="carousel__indicadores"></div>
   </section>
   <!-- <section id="trendingPreview" class="trendingPreview-container">
     <div class="trendingPreview-header">
@@ -96,6 +196,7 @@
 <div class="movie-container movie-container--loading"> -->
 
 </div>
+
       
 
     <!-- <div class="movie-container">
@@ -106,6 +207,9 @@
       />
     </div> -->
   </section>
+
+  <!-- container de las peliculas populares -->
+  <!-- <section class="genericSectionPopular-container"></section> -->
 
   <section id="movieDetail" class="movieDetail-container inactive">
     <h1 class="movieDetail-title">Deadpool</h1>
@@ -152,8 +256,9 @@
 
      
 
-  <footer>footer</footer>
   
+  
+    <script src="https://cdn.jsdelivr.net/npm/glider-js@1.7.7/glider.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./src/apiKeys.js"></script>
   <script src="./src/nodes.js"></script>
