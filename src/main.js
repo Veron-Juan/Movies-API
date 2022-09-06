@@ -43,8 +43,8 @@ function likeMovie(movie){
 
 window.addEventListener('load', function(){
     new Glider(this.document.querySelector('.rankedPreview-movieList'), {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         draggable: true,
         dots: '.carousel__indicadores',
         arrows: {
@@ -55,8 +55,8 @@ window.addEventListener('load', function(){
 
 window.addEventListener('load', function(){
     new Glider(this.document.querySelector('.trendingPreview-movieList'), {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         draggable: true,
         dots: '.carousel__indicadores1',
         arrows: {
