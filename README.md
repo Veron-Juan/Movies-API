@@ -4,6 +4,6 @@ Consumo de API rest con javaScript
 
 ##About the project
 
-<img src='./movie-api-server (1).png'>
+<img src='./movie-api-server-readme.png'>
 
 
