@@ -11,8 +11,8 @@ const seeMore = ()=> {
 }
 
 arrowBtn.addEventListener('click', ()=> {
-    location.hash = '#home';
     location.hash = window.history.back();
+    location.hash = '#home';
     // location.hash = history.go(-1);
     // bars.innerHTML = '';
     
