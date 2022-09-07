@@ -188,6 +188,7 @@ async function getTrendingMoviesPreview(){
 }
 
 //obtengo pupular movies version chica
+
 async function rankedMovie(){
     
     const { data } = await api('movie/top_rated');

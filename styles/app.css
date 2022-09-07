@@ -672,6 +672,12 @@ color: rgb(202, 199, 199);
     opacity: 1;
     
   }
+  /* .rankedPreview-movieList .movie-container .movie-img{
+    min-width: 180px;
+    min-height: 260px;
+    margin-right: 18px;
+  } */
+
   .glider-slide {
     min-width: 180px;
     min-height: 260px;
@@ -679,17 +685,24 @@ color: rgb(202, 199, 199);
     
   }
   .glider-track{
-    gap: 55px;
-    
+    gap: 50px;
     
   }
+  .rankedPreview-movieList{
+    gap: 32px;
+  }
+  .rankedPreview-movieList .movie-container .movie-img{
+    min-width: 180px;
+    min-height: 260px;
+  }
+
   .glider.draggable{
     height: 100%;
     
   }
-  .rankedPreview-movieList  .glider-track{
+  /* .rankedPreview-movieList  .glider-track{
     gap: 64px;
-  }
+  } */
   /* .genericList-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

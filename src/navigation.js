@@ -13,6 +13,8 @@ const seeMore = ()=> {
 arrowBtn.addEventListener('click', ()=> {
     location.hash = window.history.back();
     location.hash = '#home';
+    
+
     // location.hash = history.go(-1);
     // bars.innerHTML = '';
     
@@ -57,6 +59,7 @@ function homePage() {
   searchForm.classList.remove('inactive');
 
   trendingPreviewSection.classList.remove('inactive');
+  rankedPreviewSection.classList.remove('inactive');
   categoriesPreviewSection.classList.remove('inactive');
   likedMoviesSection.classList.remove('inactive');
   //
@@ -70,7 +73,8 @@ function homePage() {
   getTrendingMoviesPreview();
   getCategoriesPreview();
   getLikedMovies();
-  rankedMovie()
+  setTimeout(rankedMovie, 2000)
+  // rankedMovie();
   
 }
 function categoriesPage() {
