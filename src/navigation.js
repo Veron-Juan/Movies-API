@@ -6,17 +6,18 @@ trendingBtn.addEventListener('click', ()=> {
     location.hash = '#trends';
 })
 
+const seeMore = ()=> {
+  location.hash = '#trends';
+}
+
 arrowBtn.addEventListener('click', ()=> {
-    location.hash = '#home';
+    // location.hash = '#home';
     // location.hash = window.history.back();
-    // location.hash = history.go(-1);
+    location.hash = history.go(-1);
     // bars.innerHTML = '';
     
 })
-const buttonPopular = document.querySelector('.ranked-btn').addEventListener('click', ()=> {
-  location.hash = '#popular';
-  getPupularMovies()
-})
+
 
 
 window.addEventListener("DOMContentLoaded", navigator, false)
@@ -58,6 +59,7 @@ function homePage() {
   trendingPreviewSection.classList.remove('inactive');
   categoriesPreviewSection.classList.remove('inactive');
   likedMoviesSection.classList.remove('inactive');
+  //
   genericSection.classList.add('inactive');
   movieDetailSection.classList.add('inactive');
   document.querySelector('.header-first').classList.remove('inactive');

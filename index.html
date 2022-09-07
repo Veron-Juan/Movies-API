@@ -28,12 +28,12 @@
     <h1 class="header-title header-title--categoryView inactive">Acción</h1>
     <nav class="menu-toggle">
       <ul class="menu-toggle-ul">
-        <li class="menu-toggle-ul_li">Categories</li>
-        <li class="menu-toggle-ul_li">Trends</li>
-        <li class="menu-toggle-ul_li">Popular</li>
-        <li class="menu-toggle-ul_li">Favorites</li>
-        <li class="menu-toggle-ul_li">API Movie DB</li>
-        <li class="menu-toggle-ul_li">About me</li>
+        <li onclick="handle()" class="menu-toggle-ul_li"><a href="#category">Categorias</a></li>
+        <li onclick="seeMore(); handle()" class="menu-toggle-ul_li">Trends</li>
+        <li onclick="handle()" class="menu-toggle-ul_li"><a href="#popular">Populares</a></li>
+        <li onclick="handle()" class="menu-toggle-ul_li"><a href="#favoritos">Favoritas</a></li>
+        <li onclick="handle()" class="menu-toggle-ul_li"><a href="https://developers.themoviedb.org/3/getting-started/introduction" target="_blank" >The Movie DB API</a></li>
+        <li onclick="handle()" class="menu-toggle-ul_li"><a href="https://juanvpdev.vercel.app/" target="_blank" >About me</a></li>
       </ul>
     </nav>
 
@@ -94,8 +94,8 @@
 
   <section id="rankedPreview" class="ranked-container">
     <div class="ranked-header">
-      <h2 class="ranked-title">Mejores punteadas</h2>
-      <button class="ranked-btn">Ver más</button>
+      <h2 id="populares" class="ranked-title">Mejores punteadas</h2>
+      <!-- <button class="ranked-btn">Ver más</button> -->
     </div>
 
     <button aria-label="Anterior" class="btn-anterior">
@@ -174,20 +174,10 @@
 
     <div role="tablist" class="carousel__indicadores"></div>
   </section>
-  <!-- <section id="trendingPreview" class="trendingPreview-container">
-    <div class="trendingPreview-header">
-      <h2 class="trendingPreview-title">Mejores punteadas</h2>
-      <button class="trendingPreview-btn">Ver más</button>
-      
-    </div>
-    <article class="PunteadasPreview-movieList"></article>
-  </section> -->
-    
 
-  <!-- <div class="prueba"></div> -->
 
   <section id="categoriesPreview" class="categoriesPreview-container">
-    <h2 class="categoriesPreview-title">Categorías</h2>
+    <h2 id="category" class="categoriesPreview-title">Categorías</h2>
 
     <article class="categoriesPreview-list">
       <div class="category-container category-container--loading"></div>
@@ -206,7 +196,7 @@
       <h2 class="liked-title">Peliculas Favoritas</h2>
     </div>
 
-    <article class="liked-movieList">
+    <article id="favoritos" class="liked-movieList">
       <!-- <div class="movie-container">
       <img
         src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
@@ -240,10 +230,10 @@
   <!-- <section class="genericSectionPopular-container"></section> -->
 
   <section id="movieDetail" class="movieDetail-container inactive">
-    <h1 class="movieDetail-title">Deadpool</h1>
-    <span class="movieDetail-score">7.6</span>
+    <h1 class="movieDetail-title"></h1>
+    <span class="movieDetail-score"></span>
     <p class="movieDetail-description">
-      Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy's life.
+      
     </p>
 
 
